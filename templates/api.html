@@ -1,0 +1,115 @@
+{% include "header.tmpl" %} 
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+          <a href="{{ url_for('login') }}" class="nav-item nav-link">Inicio</a>
+      </div>
+    </div>
+  </nav>
+<h1 class="container d-flex justify-content-center">Buscador de libros</h1>
+  <div class="container">
+      <h2>Documentacion de la API</h2>
+  </div>
+  <div class="container">
+      <h3>Obtener un libro por isbnumber</h3>
+      <p><strong>"/api/num/{isbnumber}"</strong>  devuelve la informacion relacionada a el libro con el numero "isbnumber" especificado.</p>
+      <p>Yendo a: <strong><a href="/api/num/0765317508"> "/api/num/0765317508"</a></strong></p>
+      <p>Lo que se recibe.</p>
+      <code>
+          {
+              "author": "Gary Jennings", 
+              "average_score": 0, 
+              "isbn": "0765317508", 
+              "review_count": 0, 
+              "title": "Aztec", 
+              "year": "1980"
+            }
+      </code>
+      <p>Cuando se llama a la API con un numero no valido:</p>
+      <p>Llamada: <strong><a href="/api/num/01">"/api/num/01"</a></strong></p>
+      <code>
+          {
+              "error": "Error: Ese isbn no existe"
+          }
+      </code>
+  </div>
+
+  <div class="container">
+    <h3>Obtener todos los isbnumber.</h3>
+    <p>Dirigiendonos a <strong><a href="/api/all_isbn"> "/api/all_isbn"</a></strong> se obtendra: </p>
+    <code>
+      {
+          "all_isbnumbers": [
+            {
+              "isbn": "isbn"
+            }, 
+            {
+              "isbn": "0380795272"
+            }, 
+            ... 
+            {
+              "isbn": "0553262149"
+            }
+          ]
+        }
+    </code>
+  </div>
+  <div class="container">
+    <h3>Obtener todos los libros.</h3>
+    <p>Dirigiendonos a <strong><a href="/api/all">"/api/all"</a></strong> se obtendra: </p>
+    <code>
+      {
+        "all_books": [
+          {
+            "author": "author", 
+            "isbn": "isbn", 
+            "publicationyear": "year", 
+            "title": "title"
+          }, 
+          ... 
+          , 
+          {
+            "author": "L.M. Montgomery", 
+            "isbn": "0553262149", 
+            "publicationyear": "1925", 
+            "title": "Emily Climbs"
+          }
+        ]
+      }
+
+    </code>
+  </div>  
+  
+  <div class="container">
+    <h3>Obtener todas las reviews de un libro por isbnumber</h3>
+    <p>Dirigiendonos a <strong><a href="/api/reviews/1481438867">"/api/reviews/{isbnumber}"</a>, donde isbnumber es el numero asociado al libro, se obtendra: </strong></p>
+    <code>
+      {
+        "Todas las reviews:": [
+          {
+            "isbnumber": "1481438867", 
+            "reviewtext": "muy bueno", 
+            "value": 3
+          }, 
+          {
+            "isbnumber": "1481438867", 
+            "reviewtext": "malardisimo", 
+            "value": 1
+          }, 
+          {
+            "isbnumber": "1481438867", 
+            "reviewtext": "Me gusto bastante", 
+            "value": 3
+          }
+        ]
+      }
+    </code>
+  </div>
+
+
+
+    
+{% include "footer.tmpl" %}   

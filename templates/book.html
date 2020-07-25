@@ -1,92 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Books</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-</head>
-<body>
+{% include "header.tmpl" %} 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <p class="nav-item nav-link disabled" tabindex="-1"><strong>{{ name.capitalize() }}</strong></p>
+        <p class="nav-item nav-link disabled" tabindex="-1"><strong>{{ name }}</strong></p>
+        <a href="{{ url_for('api_info') }}" class="nav-item nav-link">API doc</a>
         <a class="nav-item nav-link" href="{{ url_for('logout') }}">Salir</a>
       </div>
     </div>
   </nav>
-    
+  <h1 class="container d-flex justify-content-center">Buscador de libros</h1>
   <div class="container d-flex justify-content-center">
     <h1>{{ book[1] }}</h1>
   </div>
 
-  <div class="container">
-    <p>Autor: {{ book[2] }} </p>
-    <p>Publicado en {{ book[3] }} </p>
+  <div class="container d-flex justify-content-center">
+    <div>
+
+    
+      <p>Autor: <strong>{{ book[2] }} </strong></p>
+      <br>
+      <p>Publicado en <strong>{{ book[3] }}</strong>  </p>
+      <br>
+      <p>Promedio de calificacion en <a href="https://www.goodreads.com/">GoodsReads</a>: <strong>{{ average }}</strong> </p>
+    </div>
   </div>
 
   <br>
-
-  <div class="container" id="comentarios">
-
+  <hr class="separador">
+  <div class="row d-flex justify-content-center" id="comentarios">
     {% if reviews %}
-      <p>Promedio de calificacion en GoodsReads: {{ average }} </p>
+      
       {% for review in reviews %}
 
-        <div class="comentario">
-          <p>Calificacion: {{ review[1] }} </p>
+        <div class="comentario col-lg-5 col-md-5 col-sm-10">
+          <div>
+            <p>Calificacion: <strong>{{ review[1] }}</strong> </p>
+            <p>De: <strong>{{ review[4]|nombresito }}</strong></p>
+          </div>
+          
           <p>Comentario: {{ review[2] }} </p>
-          <p>Nombre: {{ review[4]|nombresito }}</p>
+          
         </div>
       {% endfor %}
     {% endif %}
-
   </div>
-  <div class="container">
+  <hr class="separador">
+  <div class="container review">
     <form method="post" class="container">
       <label>Calificacion</label>
-      <input type="number" id="quantity" name="quantity" min="1" max="5">
+      <input type="number" id="quantity" name="quantity" min="1" max="5" required>
       <label>Comentario</label>
-      <textarea name="review" id="review" cols="70" rows="6"></textarea>
-      <input type="submit">
+      <textarea name="review" id="review" cols="70" rows="6" required></textarea>
+      <br>
+      <button type="submit">Enviar</button>
     </form>
+
   </div>
 
-  {% if review_exists == none %}
-  <div class="alert alert-secondary" role="alert">
-    ¡Ya calificaste este libro!
-  </div>
-  {% endif %}
-
-  <style>
-    .container form{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .container input{
-      width: 50px;
-    }
-
-    .comentario{
-      background-color: #e3f6f5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 50%;
-    }
-  </style>
-
-
-
-</body>
-</html>
+{% include "footer.tmpl" %}   
