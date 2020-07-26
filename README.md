@@ -11,7 +11,7 @@ La aplicacion web fue construida con flask, postgresql, HTML y CSS.
 ## Capturas de pantalla.
 
 
-![Ingresar](ingresar.png "Ingresar")  
+![Ingresar](Ingresar.png "Ingresar")  
 Al ingresar a la pagina, se puede ingresar con un usuario y una contraseña, registrarse o ir a la documentacion de la api.
 
 ![Ingresar](buscar.png "Buscar")  
@@ -38,7 +38,7 @@ The application was build with flask, postgresql, HTML and CSS
 ## Screanshoots.
 
 
-![Login](ingresar.png "Login") 
+![Login](Ingresar.png "Login") 
 You can log in with an user and a password, register or go to the api documentation. 
 
 ![Search](buscar.png "Search")  
